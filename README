@@ -1,0 +1,72 @@
+*************************************************************************
+*       README file for Summarizing News Articles with user Query       *
+*************************************************************************
+
+REQUIREMENTS: a. Python and it's standard libraries
+              b. NLTK along with the "punkt sentence tokenizer" and "english-pickle"
+              c. Python lxml-library
+
+
+The folder contains the following MAIN scripts:
+
+*************
+*  SCRIPT 1 *
+*************
+GoogleNews.py - An independent script that can fetch the desired number of URLs for a particular search query
+
+USAGE: The script consists of the following function:
+        search(query, number of links)
+
+query = Is the desired query seperated by '+' 
+
+eg: If your desired search is "Mayawati BSP election" then the query string should be "Mayawati+BSP+election"
+
+
+
+*************
+*  SCRIPT 2 *
+*************
+readability.py - Independent script that extracts relevant text from a URL
+
+USAGE: The script consists of uses a lot of support scripts for cleaning, housekeeping, debugging and logging. The "Document" class in the mentioned script isuseful for the task of extracting relavant text. Following is the way to use it in python terminal
+
+>> from readability import Document
+>> html = urllib2.urlopen(INSERT_URL_HERE).read()
+>> article = Document(html).summary()
+        
+
+OUTPUT: Relevant Text. (Uses the algorithm by the arc90 readability project. Check my other github repo for the same)
+
+*************
+*  SCRIPT 3 *
+*************
+summarize.py - Independent script that creates the summary using TextRank for sentences.
+
+USAGE: Following is the way to use it in a python terminal
+>> import summarize
+>> ss = summarize.SimpleSummarizer()
+>> summary = ss.summarize(INSERT_TEXT_TO_BE_SUMMARIZED_HERE,NUMBER_OF_LINES_FOR_SUMMARY)
+
+OUTPUT: Summarized text.
+
+
+*************
+*  SCRIPT 4 *
+*************
+Extract_News_Summary.py - A script that uses all the above scripts
+
+INPUT: Query and number of news articles to be scraped
+
+USAGE: On the terminal do the following
+
+python Extract_News_Summary.py <Number of links> <Query>
+
+example: python Extract_News_Summary.py 50 India Pakistan Cricket
+
+
+TODO: 1. Get urllib exception handling 
+      2. Unicode-ASCII conversion is weakly handled
+      3. If possible better scraping
+      4. More complex Summarization algorithms
+      5. urllib2 fetching is slow
+
