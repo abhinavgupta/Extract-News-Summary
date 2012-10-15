@@ -26,14 +26,7 @@ REGEXES = {
     'okMaybeItsACandidateRe': re.compile('and|article|body|column|main|shadow', re.I),
     'positiveRe': re.compile('article|body|content|entry|hentry|main|page|pagination|post|text|blog|story', re.I),
     'negativeRe': re.compile('combx|comment|com-|contact|foot|footer|footnote|masthead|media|meta|outbrain|promo|related|scroll|shoutbox|sidebar|sponsor|shopping|tags|tool|widget', re.I),
-    'divToPElementsRe': re.compile('<(a|blockquote|dl|div|img|ol|p|pre|table|ul)', re.I),
-    #'replaceBrsRe': re.compile('(<br[^>]*>[ \n\r\t]*){2,}',re.I),
-    #'replaceFontsRe': re.compile('<(\/?)font[^>]*>',re.I),
-    #'trimRe': re.compile('^\s+|\s+$/'),
-    #'normalizeRe': re.compile('\s{2,}/'),
-    #'killBreaksRe': re.compile('(<br\s*\/?>(\s|&nbsp;?)*){1,}/'),
-    #'videoRe': re.compile('http:\/\/(www\.)?(youtube|vimeo)\.com', re.I),
-    #skipFootnoteLink:      /^\s*(\[?[a-z0-9]{1,2}\]?|^|edit|citation needed)\s*$/i,
+    'divToPElementsRe': re.compile('<(a|blockquote|dl|div|img|ol|p|pre|table|ul)', re.I),   
 }
 
 
@@ -438,17 +431,10 @@ class Document:
                         content_score = candidates[parent_node]['content_score']
                     else:
                         content_score = 0
-                #if parent_node is not None:
-                    #pweight = self.class_weight(parent_node) + content_score
-                    #pname = describe(parent_node)
-                #else:
-                    #pweight = 0
-                    #pname = "no parent"
+             
                 to_remove = False
                 reason = ""
 
-                #if el.tag == 'div' and counts["img"] >= 1:
-                #    continue
                 if counts["p"] and counts["img"] > counts["p"]:
                     reason = "too many images (%s)" % counts["img"]
                     to_remove = True
@@ -472,26 +458,6 @@ class Document:
                 elif (counts["embed"] == 1 and content_length < 75) or counts["embed"] > 1:
                     reason = "<embed>s with too short content length, or too many <embed>s"
                     to_remove = True
-#                if el.tag == 'div' and counts['img'] >= 1 and to_remove:
-#                    imgs = el.findall('.//img')
-#                    valid_img = False
-#                    self.debug(tounicode(el))
-#                    for img in imgs:
-#
-#                        height = img.get('height')
-#                        text_length = img.get('text_length')
-#                        self.debug ("height %s text_length %s" %(repr(height), repr(text_length)))
-#                        if to_int(height) >= 100 or to_int(text_length) >= 100:
-#                            valid_img = True
-#                            self.debug("valid image" + tounicode(img))
-#                            break
-#                    if valid_img:
-#                        to_remove = False
-#                        self.debug("Allowing %s" %el.text_content())
-#                        for desnode in self.tags(el, "table", "ul", "div"):
-#                            allowed[desnode] = True
-
-                    #find x non empty preceding and succeeding siblings
                     i, j = 0, 0
                     x = 1
                     siblings = []
@@ -521,8 +487,6 @@ class Document:
                 if to_remove:
                     self.debug("Cleaned %6.3f %s with weight %s cause it has %s." %
                         (content_score, describe(el), weight, reason))
-                    #print tounicode(el)
-                    #self.debug("pname %s pweight %.3f" %(pname, pweight))
                     el.drop_tree()
 
         for el in ([node] + [n for n in node.iter()]):

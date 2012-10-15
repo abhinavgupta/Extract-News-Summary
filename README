@@ -7,7 +7,7 @@ REQUIREMENTS: a. Python and it's standard libraries
               c. Python lxml-library
 
 
-The folder contains the following MAIN scripts:
+The sub-folder contains the following MAIN scripts of the same name:
 
 *************
 *  SCRIPT 1 *
