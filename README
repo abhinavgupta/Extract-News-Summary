@@ -40,7 +40,7 @@ OUTPUT: Relevant Text. (Uses the algorithm by the arc90 readability project. Che
 *************
 *  SCRIPT 3 *
 *************
-summarize.py - Independent script that creates the summary using TextRank for sentences.
+summarize.py - (Summarize folder) Independent script that creates the summary using simple analysis for sentences.
 
 USAGE: Following is the way to use it in a python terminal
 >> import summarize
@@ -49,11 +49,35 @@ USAGE: Following is the way to use it in a python terminal
 
 OUTPUT: Summarized text.
 
-
 *************
 *  SCRIPT 4 *
 *************
+Summary.py - (TextRank folder) Independent script that creates the summary using TextRank for sentences.
+
+USAGE: Following is the way to use it in a python terminal
+>> import Summary
+>> result = Summary.textrank(article)
+
+OUTPUT: Summarized text.
+
+
+*************
+*  SCRIPT 5 *
+*************
 Extract_News_Summary.py - A script that uses all the above scripts
+
+INPUT: Query and number of news articles to be scraped
+
+USAGE: On the terminal do the following
+
+python Extract_News_Summary.py <Number of links> <Query>
+
+example: python Extract_News_Summary.py 50 India Pakistan Cricket
+
+*************
+*  SCRIPT 6 *
+*************
+Extract_News_Summary_TextRank.py - A script that generates summary of articles using the TextRank method
 
 INPUT: Query and number of news articles to be scraped
 
