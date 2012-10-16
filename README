@@ -91,6 +91,6 @@ example: python Extract_News_Summary.py 50 India Pakistan Cricket
 TODO: 1. Get urllib exception handling - Exception handling added
       2. Unicode-ASCII conversion is weakly handled
       3. If possible better scraping
-      4. More complex Summarization algorithms
+      4. More complex Summarization algorithms - Added TexRank. LexRank to be added soon
       5. urllib2 fetching is slow - Used threads ti improve fetching. Twice as fast results
 
