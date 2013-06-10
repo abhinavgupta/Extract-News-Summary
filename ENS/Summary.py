@@ -3,7 +3,7 @@ import numpy as np
 from nltk.tokenize.punkt import PunktSentenceTokenizer
 from sklearn.feature_extraction.text import TfidfTransformer, CountVectorizer
  
-def textrank(document):
+def textRank(document):
     sentence_tokenizer = PunktSentenceTokenizer()
     sentences = sentence_tokenizer.tokenize(document)
  
