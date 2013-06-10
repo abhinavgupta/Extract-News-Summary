@@ -1,3 +1,22 @@
+## Extract - News - Summary
+
+    from ENS import Document, fetch_url, textRank, newsSearch
+
+    links = newsSearch("Star Wars 7", 5)
+    for link in links:
+        article = Document(url=link).summary()
+        article = re.sub(regex, "", article)
+        article = article.encode('ascii','ignore')
+        summary = textRank(article)
+        summary = summary.encode('ascii','ignore')
+
+        print article
+        print "*** SUMMARY ***"
+        print summary
+
+
+### Old code. blah.
+
 *************************************************************************
 *       README file for Summarizing News Articles with user Query       *
 *************************************************************************
