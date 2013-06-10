@@ -2,6 +2,7 @@
 import logging
 import re
 import sys
+import urllib2
 
 from collections import defaultdict
 from lxml.etree import tostring
@@ -75,7 +76,7 @@ class Document:
     TEXT_LENGTH_THRESHOLD = 25
     RETRY_LENGTH = 250
 
-    def __init__(self, input, **options):
+    def __init__(self, text=None, url=None, **options):
         """Generate the document
 
         :param input: string of the html content.
@@ -88,7 +89,14 @@ class Document:
             - url: will allow adjusting links to be absolute
 
         """
-        self.input = input
+        if text is None:
+            if url:
+                text = urllib2.urlopen(url).read()
+            else:
+                print "No data to be parsed."
+                return
+
+        self.input = text
         self.options = options
         self.html = None
 
@@ -523,7 +531,7 @@ class HashableElement():
     def __getattr__(self, tag):
         return getattr(self.node, tag)
 
-
+"""
 def main():
     from optparse import OptionParser
     parser = OptionParser(usage="%prog: [options] [file]")
@@ -551,3 +559,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+"""
