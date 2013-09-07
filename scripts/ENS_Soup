@@ -1,10 +1,10 @@
-from ENS import Document, fetch_url, textRank, newsSearch
+from ENS import readable, fetch_url, textRank, newsSearch
 import sys
 import re
 
 number_of_links = int(sys.argv[1])
 query = '+'.join(sys.argv[2:])
-regex = re.compile("<(.*?)>|\&#13;")
+DEFAULT_ENCODING = 'latin-1'
 
 article_list = []
 summary_list = []
@@ -18,8 +18,8 @@ else:
 	result = fetch_url.fetch_parallel(links)
 
 	while not result.empty():
-		article = Document(result.get()).summary() 
-		article = re.sub(regex, "", article)
+		url_entry = result.get()
+		article = readable(url_entry[0],url_entry[1],DEFAULT_ENCODING) 
 		article = article.encode('ascii','ignore')
 		summary = textRank(article)
 		summary = summary.encode('ascii','ignore')
@@ -29,8 +29,8 @@ else:
 
 """ All the outputs are written to appropriate files in this part of the code """
 
+file_handle = open(query,'w')
+
 for i in range(0,number_of_links):
-	f2 = open(query + str(i),'w')
-	f2.write(article_list[i-1] + '\n SUMMARY OF THE ABOVE ARTICLE: \n' + summary_list[i-1])
-	f2.close()
+    file_handle.write(str(i) + '\n' + article_list[i-1] + '\n *** SUMMARY *** \n' + summary_list[i-1] + '\n')
 	
