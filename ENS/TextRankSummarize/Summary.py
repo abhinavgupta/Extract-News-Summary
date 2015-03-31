@@ -1,12 +1,11 @@
 import networkx as nx
 import numpy as np 
-from nltk.tokenize.punkt import PunktSentenceTokenizer
 from sklearn.feature_extraction.text import TfidfTransformer, CountVectorizer
  
 def textRank(document):
-    sentence_tokenizer = PunktSentenceTokenizer()
-    sentences = sentence_tokenizer.tokenize(document)
- 
+    sentences = re.split('[?.!]', document.strip('\n'))
+    sentences = [x for x in new_sentences if x != '']
+    
     bow_matrix = CountVectorizer().fit_transform(sentences)
     normalized = TfidfTransformer().fit_transform(bow_matrix)
  
